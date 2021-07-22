@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="app.modules.ws.controllers.ApiSoapController" targetNamespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="apiLoginIn">
+    <wsdl:part name="username" type="xsd:anyType" />
+    <wsdl:part name="password" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="apiLoginOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiTestWithLoginIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="dummytext" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="apiTestWithLoginOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiTestWithoutLoginIn">
+    <wsdl:part name="dummytext" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="apiTestWithoutLoginOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiGetTemplateForTokenIdIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="id" type="xsd:anyType" />
+    <wsdl:part name="skey" type="xsd:string" />
+    <wsdl:part name="resptype" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiGetTemplateForTokenIdOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiGetTemplateForWaveIdIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="id" type="xsd:anyType" />
+    <wsdl:part name="lang_id" type="xsd:string" />
+    <wsdl:part name="resptype" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiGetTemplateForWaveIdOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiLoadSurveysIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="items_list" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="apiLoadSurveysOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiLoadSurveyAnswersIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="id" type="xsd:anyType" />
+    <wsdl:part name="skey" type="xsd:string" />
+    <wsdl:part name="answers_list" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="apiLoadSurveyAnswersOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiLoadAudioIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="id" type="xsd:anyType" />
+    <wsdl:part name="skey" type="xsd:string" />
+    <wsdl:part name="answers_list" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="apiLoadAudioOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiGetMonthlyNpsInfoIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="center" type="xsd:int" />
+    <wsdl:part name="campaign" type="xsd:int" />
+    <wsdl:part name="wave" type="xsd:int" />
+    <wsdl:part name="param_num" type="xsd:int" />
+    <wsdl:part name="param_value" type="xsd:int" />
+    <wsdl:part name="months" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="apiGetMonthlyNpsInfoOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="apiCreateWaveIn">
+    <wsdl:part name="sessionkey" type="xsd:anyType" />
+    <wsdl:part name="wave_fields" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="apiCreateWaveOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="app.modules.ws.controllers.ApiSoapControllerPort">
+    <wsdl:operation name="apiLogin">
+      <wsdl:input message="tns:apiLoginIn" />
+      <wsdl:output message="tns:apiLoginOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiTestWithLogin">
+      <wsdl:input message="tns:apiTestWithLoginIn" />
+      <wsdl:output message="tns:apiTestWithLoginOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiTestWithoutLogin">
+      <wsdl:input message="tns:apiTestWithoutLoginIn" />
+      <wsdl:output message="tns:apiTestWithoutLoginOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiGetTemplateForTokenId">
+      <wsdl:input message="tns:apiGetTemplateForTokenIdIn" />
+      <wsdl:output message="tns:apiGetTemplateForTokenIdOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiGetTemplateForWaveId">
+      <wsdl:input message="tns:apiGetTemplateForWaveIdIn" />
+      <wsdl:output message="tns:apiGetTemplateForWaveIdOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiLoadSurveys">
+      <wsdl:input message="tns:apiLoadSurveysIn" />
+      <wsdl:output message="tns:apiLoadSurveysOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiLoadSurveyAnswers">
+      <wsdl:input message="tns:apiLoadSurveyAnswersIn" />
+      <wsdl:output message="tns:apiLoadSurveyAnswersOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiLoadAudio">
+      <wsdl:input message="tns:apiLoadAudioIn" />
+      <wsdl:output message="tns:apiLoadAudioOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiGetMonthlyNpsInfo">
+      <wsdl:input message="tns:apiGetMonthlyNpsInfoIn" />
+      <wsdl:output message="tns:apiGetMonthlyNpsInfoOut" />
+    </wsdl:operation>
+    <wsdl:operation name="apiCreateWave">
+      <wsdl:input message="tns:apiCreateWaveIn" />
+      <wsdl:output message="tns:apiCreateWaveOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="app.modules.ws.controllers.ApiSoapControllerBinding" type="tns:app.modules.ws.controllers.ApiSoapControllerPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="apiLogin">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiLogin" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiTestWithLogin">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiTestWithLogin" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiTestWithoutLogin">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiTestWithoutLogin" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiGetTemplateForTokenId">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiGetTemplateForTokenId" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiGetTemplateForWaveId">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiGetTemplateForWaveId" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiLoadSurveys">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiLoadSurveys" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiLoadSurveyAnswers">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiLoadSurveyAnswers" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiLoadAudio">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiLoadAudio" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiGetMonthlyNpsInfo">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiGetMonthlyNpsInfo" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apiCreateWave">
+      <soap:operation soapAction="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1#apiCreateWave" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="app.modules.ws.controllers.ApiSoapControllerService">
+    <wsdl:port name="app.modules.ws.controllers.ApiSoapControllerPort" binding="tns:app.modules.ws.controllers.ApiSoapControllerBinding">
+      <soap:address location="https://bo-emea.opinat.com/index.php/ws/api-soap/ws?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
