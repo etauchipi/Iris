@@ -147,7 +147,7 @@ namespace Iris
             catch (Exception e)
             {
                 sToken = "No Token";
-                lblEncuesta1.Text = e.InnerException.Message;
+                lblEncuesta1.Text = e.InnerException != null ? e.InnerException.Message : e.Message;;
             }
             finally
             {
@@ -167,7 +167,7 @@ namespace Iris
             }
             catch (Exception e)
             {
-                sRespuesta = e.InnerException.Message;
+                sRespuesta = e.InnerException != null ? e.InnerException.Message : e.Message;;
             }
             finally
             {
