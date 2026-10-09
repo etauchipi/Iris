@@ -184,58 +184,52 @@ namespace Iris
 
         }
 
+        // Método auxiliar para lectura y limpieza segura de datos
+        private string ObtenerValorSeguro(DataRow row, string columnName)
+        {
+            // Si la columna es nula en la BD, retorna un string vacío
+            if (row.IsNull(columnName)) return string.Empty;
+        
+            string valor = row.Field<string>(columnName);
+            if (string.IsNullOrEmpty(valor)) return string.Empty;
+        
+            // Aplica Trim y escapa caracteres especiales para no romper el XML
+            return System.Security.SecurityElement.Escape(valor.Trim());
+        }
+        
         private string LlenaXML(ref DataSet dsData)
         {
-
-            string Retorno;
-            string sCad;
-
-            Retorno = string.Empty;
-
-            for (int i = 0; i < dsData.Tables[0].Rows.Count - 1; i++)
+            // Usamos StringBuilder para un mejor rendimiento en el manejo de memoria
+            StringBuilder Retorno = new StringBuilder();
+        
+            // Corrección: i < Count (eliminado el "- 1" para no omitir la última fila)
+            for (int i = 0; i < dsData.Tables[0].Rows.Count; i++)
             {
-
-                Retorno = "<survey>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("wave_id").Trim();
-                Retorno += "<wave_id>" + sCad + "</wave_id>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("internal_code").Trim();
-                Retorno += "<internal_code>" + sCad + "</internal_code>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("email").Trim();
-                Retorno += "<email>" + sCad + "</email>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("phone").Trim();
-                Retorno += "<phone>" + sCad + "</phone>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("lang").Trim();
-                Retorno += "<lang>" + sCad + "</lang>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("name").Trim();
-                Retorno += "<name>" + sCad + "</name>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field01").Trim();
-                Retorno += "<field01>" + sCad + "</field01>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field02").Trim();
-                Retorno += "<field02>" + sCad + "</field02>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field03").Trim();
-                Retorno += "<field03>" + sCad + "</field03>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field04").Trim();
-                Retorno += "<field04>" + sCad + "</field04>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field05").Trim();
-                Retorno += "<field05>" + sCad + "</field05>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field06").Trim();
-                Retorno += "<field06>" + sCad + "</field06>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field07").Trim();
-                Retorno += "<field07>" + sCad + "</field07>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field08").Trim();
-                Retorno += "<field08>" + sCad + "</field08>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field09").Trim();
-                Retorno += "<field09>" + sCad + "</field09>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("field10").Trim();
-                Retorno += "<field10>" + sCad + "</field10>";
-                sCad = dsData.Tables[0].Rows[i].Field<string>("internal_data_field").Trim();
-                Retorno += "<internal_data_field>" + sCad + "</internal_data_field>";
-                Retorno += "</survey>";
-
+                DataRow fila = dsData.Tables[0].Rows[i];
+        
+                // Corrección: Usamos .Append() para concatenar en lugar de sobrescribir
+                Retorno.Append("<survey>");
+                Retorno.Append("<wave_id>").Append(ObtenerValorSeguro(fila, "wave_id")).Append("</wave_id>");
+                Retorno.Append("<internal_code>").Append(ObtenerValorSeguro(fila, "internal_code")).Append("</internal_code>");
+                Retorno.Append("<email>").Append(ObtenerValorSeguro(fila, "email")).Append("</email>");
+                Retorno.Append("<phone>").Append(ObtenerValorSeguro(fila, "phone")).Append("</phone>");
+                Retorno.Append("<lang>").Append(ObtenerValorSeguro(fila, "lang")).Append("</lang>");
+                Retorno.Append("<name>").Append(ObtenerValorSeguro(fila, "name")).Append("</name>");
+                Retorno.Append("<field01>").Append(ObtenerValorSeguro(fila, "field01")).Append("</field01>");
+                Retorno.Append("<field02>").Append(ObtenerValorSeguro(fila, "field02")).Append("</field02>");
+                Retorno.Append("<field03>").Append(ObtenerValorSeguro(fila, "field03")).Append("</field03>");
+                Retorno.Append("<field04>").Append(ObtenerValorSeguro(fila, "field04")).Append("</field04>");
+                Retorno.Append("<field05>").Append(ObtenerValorSeguro(fila, "field05")).Append("</field05>");
+                Retorno.Append("<field06>").Append(ObtenerValorSeguro(fila, "field06")).Append("</field06>");
+                Retorno.Append("<field07>").Append(ObtenerValorSeguro(fila, "field07")).Append("</field07>");
+                Retorno.Append("<field08>").Append(ObtenerValorSeguro(fila, "field08")).Append("</field08>");
+                Retorno.Append("<field09>").Append(ObtenerValorSeguro(fila, "field09")).Append("</field09>");
+                Retorno.Append("<field10>").Append(ObtenerValorSeguro(fila, "field10")).Append("</field10>");
+                Retorno.Append("<internal_data_field>").Append(ObtenerValorSeguro(fila, "internal_data_field")).Append("</internal_data_field>");
+                Retorno.Append("</survey>");
             }
-
-            return Retorno;
-
+        
+            return Retorno.ToString();
         }
 
         private string TerminaXML(string sMensaje )
